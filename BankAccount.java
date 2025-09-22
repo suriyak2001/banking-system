@@ -36,4 +36,14 @@ class BankAccount {
   public void checkBalance() {
     System.out.println("current balance: " + balance);
   }
+
+  // getter for  account number
+  public String getAccountNumber() {
+    return accountNumber;
+  }
+
+  // getter for account holder name
+  public String getAccountHolderName() {
+    return accountHolderName;
+  }
 }
