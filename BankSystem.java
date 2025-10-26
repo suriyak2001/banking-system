@@ -1,12 +1,45 @@
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class BankSystem {
-  // main class
-  public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
+  private HashMap<Integer, BankAccount> accounts = new HashMap<>();
+  private int nextAccountNumber = 1001;
+  private Scanner input = new Scanner(System.in);
+  
+  // account creation
+  public void createAccount() {
+    input.nextLine();
+    System.out.println("Enter your name: ");
+    String name = input.nextLine();
+    System.out.println("Set a 4-digit pin: ");
+    int pin = input.nextInt();
 
-    BankAccount account = new BankAccount("101", "suriya", 10000);
+    int accountNumber = nextAccountNumber++;
+    BankAccount newAccount = new BankAccount(name, accountNumber, pin);
+    accounts.put(accountNumber, newAccount);
 
+    System.out.println("\n Your account has been created successfully");
+    System.out.println("Your account number: " + accountNumber);
+  }
+  
+  // login using pin
+  public void login() {
+    System.out.print("Enter your account number: ");
+    int accNum = input.nextInt();
+    System.out.print("Enter valid pin: ");
+    int pin = input.nextInt();
+
+    BankAccount account = accounts.get(accNum);
+    if (account != null && account.validatePin(pin)) {
+      System.out.println("\n Login successful. Welcome, " + account.getAccountHolderName());
+      bankingMenu(account);
+    } else {
+      System.out.println("Invalid account number or PIN");
+    }
+  }
+  
+  // banking menu
+  private void bankingMenu(BankAccount account) {
     int choice;
 
     do {
@@ -17,7 +50,7 @@ public class BankSystem {
       choice = input.nextInt();
 
       // choices
-      switch(choice) {
+      switch (choice) {
 
         //for deposit
         case 1: {
@@ -53,7 +86,38 @@ public class BankSystem {
 
       }
     } while (choice != 4);
+  }
+  
+  // main menu
+  public void mainMenu() {
+    int choice;
 
-    input.close();
+    do {
+      System.out.println("\n *** Welcome to Simple Bank ***");
+      System.out.println("1) create account");
+      System.out.println("2) login");
+      System.out.println("3) exit");
+      System.out.print("Enter your choice: ");
+
+      choice = input.nextInt();
+
+      switch (choice) {
+        case 1: {
+          createAccount();
+          break;
+        }
+        case 2: {
+          login();
+          break;
+        }
+        case 3: {
+          System.out.print("Thank you for using Simple Bank");
+          break;
+        }
+        default: {
+          System.out.print("Invalid choice. Try again!");
+        }
+      }
+    } while (choice != 3);
   }
 }
