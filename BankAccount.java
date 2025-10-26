@@ -1,22 +1,30 @@
 class BankAccount {
 
   // fields for account details
-  private String accountNumber;
+  
   private String accountHolderName;
+  private int accountNumber;
+  private int pin;
   private double balance;
 
   // constructor
-  public BankAccount (String accountNumber, String accountHolderName, double balance) {
-    this.accountNumber = accountNumber;
+  public BankAccount(String accountHolderName, int accountNumber, int pin) {
     this.accountHolderName = accountHolderName;
-    this.balance = balance;
+    this.accountNumber = accountNumber;
+    this.pin = pin;
+    this.balance = 0.0;
+  }
+
+  // validation pin 
+  public boolean validatePin(int inputPin) {
+    return this.pin == inputPin;
   }
 
   // deposit method
   public void deposit(double amount) {
     if (amount > 0) {
-      balance = balance + amount;
-      System.out.println("deposited amount: " + amount);
+      balance += amount;
+      System.out.println("Deposited amount: " + amount);
     } else {
       System.out.println("invalid deposit amount");
     }
@@ -25,10 +33,10 @@ class BankAccount {
   // withdraw method
   public void withdraw(double amount) {
     if (amount > 0 && amount <= balance) {
-      balance = balance - amount;
-      System.out.println("withdrawn amount: " + amount);
+      balance -= amount;
+      System.out.println("Withdrawn amount: " + amount);
     } else {
-      System.out.println("insufficient balance or invalid amount");
+      System.out.println("Insufficient balance or invalid amount");
     }
   }
 
@@ -38,7 +46,7 @@ class BankAccount {
   }
 
   // getter for  account number
-  public String getAccountNumber() {
+  public int getAccountNumber() {
     return accountNumber;
   }
 

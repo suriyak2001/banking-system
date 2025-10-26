@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SimpleBankingSystem {
+public class BankSystem {
   // main class
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
@@ -8,6 +8,7 @@ public class SimpleBankingSystem {
     BankAccount account = new BankAccount("101", "suriya", 10000);
 
     int choice;
+
     do {
       System.out.println("\n *****welcome to simple banking system*****");
       System.out.println("1) Deposit \n2) Withdraw \n3) Check Balance \n4) Exit");
@@ -16,7 +17,6 @@ public class SimpleBankingSystem {
       choice = input.nextInt();
 
       // choices
-
       switch(choice) {
 
         //for deposit
